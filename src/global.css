@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
-@import url("https://fonts.cdnfonts.com/css/beaufort-for-lol");
 
 @tailwind base;
 @tailwind components;
@@ -11,66 +10,66 @@
   }
 
   body {
-    @apply bg-dark-1 text-light-1 min-h-screen font-sans;
+    @apply bg-dark-1 text-white min-h-screen font-inter;
   }
 }
 
 @layer utilities {
   /* TYPOGRAPHY */
   .h1-bold {
-    @apply text-[36px] font-bold leading-[140%] tracking-tighter text-primary-500;
+    @apply text-[36px] font-bold leading-[140%] tracking-tighter;
   }
 
   .h1-semibold {
-    @apply text-[36px] font-semibold leading-[140%] tracking-tighter text-primary-500;
+    @apply text-[36px] font-semibold leading-[140%] tracking-tighter;
   }
 
   .h2-bold {
-    @apply text-[30px] font-bold leading-[140%] tracking-tighter text-secondary-500;
+    @apply text-[30px] font-bold leading-[140%] tracking-tighter;
   }
 
   .h3-bold {
-    @apply text-[24px] font-bold leading-[140%] tracking-tighter text-off-white;
+    @apply text-[24px] font-bold leading-[140%] tracking-tighter;
   }
 
   .base-semibold {
-    @apply text-[16px] font-semibold leading-[140%] tracking-tighter text-light-2;
+    @apply text-[16px] font-semibold leading-[140%] tracking-tighter;
   }
 
   .base-medium {
-    @apply text-[16px] font-medium leading-[140%] text-light-2;
+    @apply text-[16px] font-medium leading-[140%];
   }
 
   .base-regular {
-    @apply text-[16px] font-normal leading-[140%] text-light-3;
+    @apply text-[16px] font-normal leading-[140%];
   }
 
   .body-bold {
-    @apply text-[18px] font-bold leading-[140%] text-light-1;
+    @apply text-[18px] font-bold leading-[140%];
   }
 
   .body-medium {
-    @apply text-[18px] font-medium leading-[140%] text-light-2;
+    @apply text-[18px] font-medium leading-[140%];
   }
 
   .small-semibold {
-    @apply text-[14px] font-semibold leading-[140%] tracking-tighter text-light-3;
+    @apply text-[14px] font-semibold leading-[140%] tracking-tighter;
   }
 
   .small-medium {
-    @apply text-[14px] font-medium leading-[140%] text-light-3;
+    @apply text-[14px] font-medium leading-[140%];
   }
 
   .small-regular {
-    @apply text-[14px] font-normal leading-[140%] text-light-4;
+    @apply text-[14px] font-normal leading-[140%];
   }
 
   .subtle-semibold {
-    @apply text-[12px] font-semibold leading-[140%] text-light-4;
+    @apply text-[12px] font-semibold leading-[140%];
   }
 
   .tiny-medium {
-    @apply text-[10px] font-medium leading-[140%] text-light-4;
+    @apply text-[10px] font-medium leading-[140%];
   }
 
   /* UTILITIES */
@@ -97,16 +96,16 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: #37474f;
+    background: #09090a;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #00b0ff;
+    background: #5c5c7b;
     border-radius: 50px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #0081cb;
+    background: #7878a3;
   }
 
   .common-container {
@@ -132,7 +131,7 @@
   }
 
   .explore-search {
-    @apply h-12 bg-dark-3 border-none placeholder:text-light-4 focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
+    @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
   }
 
   /* Home */
@@ -145,7 +144,7 @@
   }
 
   .home-creators {
-    @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10 overflow-scroll custom-scrollbar;
+    @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10  overflow-scroll custom-scrollbar;
   }
 
   /* Post Details */
@@ -154,7 +153,7 @@
   }
 
   .post_details-card {
-    @apply bg-dark-2 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row border border-primary-600 xl:rounded-l-[24px];
+    @apply bg-dark-2 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row border border-dark-4 xl:rounded-l-[24px];
   }
 
   .post_details-img {
@@ -166,7 +165,7 @@
   }
 
   .post_details-delete_btn {
-    @apply p-0 flex gap-3 hover:bg-transparent hover:text-secondary-500 text-light-1 small-medium lg:base-medium;
+    @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1  text-light-1 small-medium lg:base-medium;
   }
 
   /* Profile */
@@ -179,7 +178,7 @@
   }
 
   .profile-tab {
-    @apply flex-center gap-3 py-4 w-48 bg-dark-2 transition flex-1 xl:flex-initial hover:bg-primary-500;
+    @apply flex-center gap-3 py-4 w-48 bg-dark-2  transition flex-1 xl:flex-initial;
   }
 
   /* Saved */
@@ -211,7 +210,7 @@
   }
 
   .grid-post_link {
-    @apply flex rounded-[24px] border border-primary-600 overflow-hidden cursor-pointer w-full h-full;
+    @apply flex rounded-[24px] border border-dark-4 overflow-hidden cursor-pointer w-full h-full;
   }
 
   .grid-post_user {
@@ -229,7 +228,7 @@
 
   /* Post Card */
   .post-card {
-    @apply bg-dark-2 rounded-3xl border border-primary-600 p-5 lg:p-7 w-full max-w-screen-sm;
+    @apply bg-dark-2 rounded-3xl border border-dark-4 p-5 lg:p-7 w-full max-w-screen-sm;
   }
 
   .post-card_img {
@@ -243,12 +242,7 @@
 
   /* User card */
   .user-card {
-    @apply flex-center flex-col gap-4 border border-primary-600 rounded-[20px] px-5 py-8;
-  }
-
-  /* Hextech glow effect */
-  .hextech-glow {
-    @apply animate-hextech-glow;
+    @apply flex-center flex-col gap-4 border border-dark-4 rounded-[20px] px-5 py-8;
   }
 }
 
@@ -256,7 +250,7 @@
   /* SHADCN COMPONENTS */
   /* Form */
   .shad-form_label {
-    @apply text-light-2 !important;
+    @apply text-white !important;
   }
 
   .shad-form_message {
@@ -264,23 +258,23 @@
   }
 
   .shad-input {
-    @apply h-12 bg-dark-3 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-primary-500 !important;
+    @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
   }
 
   .shad-textarea {
-    @apply h-36 bg-dark-3 rounded-xl border-none focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-primary-500 !important;
+    @apply h-36 bg-dark-3 rounded-xl border-none focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
   }
 
   /* Button */
   .shad-button_primary {
-    @apply bg-primary-500 hover:bg-primary-600 text-light-1 flex gap-2 !important;
+    @apply bg-primary-500 hover:bg-primary-500 text-light-1 flex gap-2 !important;
   }
 
   .shad-button_dark_4 {
-    @apply h-12 bg-dark-4 px-5 text-light-1 flex gap-2 hover:bg-primary-500 !important;
+    @apply h-12 bg-dark-4 px-5 text-light-1 flex gap-2 !important;
   }
 
   .shad-button_ghost {
-    @apply flex gap-4 items-center justify-start hover:bg-dark-3 hover:text-primary-500 !important;
+    @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
 }
