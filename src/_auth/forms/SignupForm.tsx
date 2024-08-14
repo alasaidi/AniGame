@@ -3,15 +3,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SignupValidation } from "@/lib/validation";
 import Loader from "@/components/shared/Loader";
@@ -39,17 +31,10 @@ function SignupForm() {
     <Form {...form}>
       <div className="sm:w-300 flex-center flex-col">
         <img src="/assets/images/logo.svg" alt="Logo" />
-        <h3 className="h3-bold md:h2-bold pt-3 sm:pt-5">
-          Creat a new account{" "}
-        </h3>
-        <p className="text-light-3 small-medium md:base-regular mt-2">
-          To use AniGame enter your account details
-        </p>
+        <h3 className="h3-bold md:h2-bold pt-3 sm:pt-5">Creat a new account </h3>
+        <p className="text-light-3 small-medium md:base-regular mt-2">To use AniGame enter your account details</p>
 
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-2 w-full mt-2 "
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 w-full mt-2 ">
           <FormField
             control={form.control}
             name="name"
@@ -114,10 +99,7 @@ function SignupForm() {
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
             Already have an account?
-            <Link
-              to="/sign-in"
-              className="text-primary-500 text-small-semibold ml-1"
-            >
+            <Link to="/sign-in" className="text-primary-500 text-small-semibold ml-1">
               Log in
             </Link>
           </p>
