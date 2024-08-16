@@ -1,7 +1,6 @@
 import { INewUser } from "@/types";
 import { ID, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases } from "./config";
-import { error } from "console";
 
 const createUserAccount = async (user: INewUser) => {
   try {
