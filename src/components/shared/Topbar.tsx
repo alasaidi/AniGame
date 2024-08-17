@@ -17,7 +17,7 @@ function Topbar() {
     <section className="topbar">
       <div className="flex-between py-4 px-5">
         <Link to="/" className="flex gap-3 items-center">
-          <img src="/assets/images/logo.png" alt="Logo" width={100} height={100} />
+          <img src="/assets/images/logo.png" alt="Logo" width={50} height={50} />
         </Link>
         <div className="flex gap-4">
           {" "}
