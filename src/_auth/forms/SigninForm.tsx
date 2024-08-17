@@ -53,7 +53,7 @@ function SigninForm() {
   return (
     <Form {...form}>
       <div className="sm:w-300 flex-center flex-col">
-        <img src="/assets/images/logo.svg" alt="Logo" />
+        <img src="/assets/images/logo.png" alt="Logo" className="w-24 h-24" />
         <h3 className="h3-bold md:h2-bold pt-3 sm:pt-5">Log in to your account </h3>
         <p className="text-light-3 small-medium md:base-regular mt-2">Welcome back, Please enter your details</p>
 

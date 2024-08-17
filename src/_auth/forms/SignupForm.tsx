@@ -63,7 +63,7 @@ function SignupForm() {
   return (
     <Form {...form}>
       <div className="sm:w-300 flex-center flex-col">
-        <img src="/assets/images/logo.svg" alt="Logo" />
+        <img src="/assets/images/logo.png" alt="Logo" />
         <h3 className="h3-bold md:h2-bold pt-3 sm:pt-5">Creat a new account </h3>
         <p className="text-light-3 small-medium md:base-regular mt-2">To use AniGame enter your account details</p>
 
