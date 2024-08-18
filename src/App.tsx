@@ -2,7 +2,18 @@ import { Route, Routes } from "react-router-dom";
 import SignInForm from "./_auth/forms/SigninForm";
 import SignupForm from "./_auth/forms/SignupForm";
 import "./global.css";
-import { AllUsers, CreatePost, EditPost, Explore, Home, LikedPosts, PostDetails, Profile, Saved, UpdateProfile } from "./_root/pages";
+import {
+  AllUsers,
+  CreatePost,
+  EditPost,
+  Explore,
+  Home,
+  LikedPosts,
+  PostDetails,
+  Profile,
+  Saved,
+  UpdateProfile,
+} from "./_root/pages";
 import AuthLaout from "./_auth/AuthLaout";
 import RootLayout from "./_root/RootLayout";
 import { Toaster } from "@/components/ui/toaster";

@@ -3,13 +3,23 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SignupValidation } from "@/lib/validation";
 import Loader from "@/components/shared/Loader";
 import createUserAccount from "@/lib/appwrite/api";
 import { useToast } from "@/components/ui/use-toast";
-import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutation";
+import {
+  useCreateUserAccount,
+  useSignInAccount,
+} from "@/lib/react-query/queriesAndMutation";
 import { useUserContext } from "@/context/AuthContext";
 
 function SignupForm() {
@@ -18,9 +28,11 @@ function SignupForm() {
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
   const navigate = useNavigate();
   //mutation for creating user account
-  const { mutateAsync: createUserAccount, isPending: isCreatingAccount } = useCreateUserAccount();
+  const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
+    useCreateUserAccount();
   //mutation for logging to user account
-  const { mutateAsync: signInAccount, isPending: isSigningIn } = useSignInAccount();
+  const { mutateAsync: signInAccount, isPending: isSigningIn } =
+    useSignInAccount();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -65,9 +77,14 @@ function SignupForm() {
       <div className="sm:w-300 flex-center flex-col">
         <img src="/assets/images/logo.png" alt="Logo" className="w-24 h-24" />
         <h3 className="h3-bold md:h2-bold ">Creat a new account </h3>
-        <p className="text-light-3 small-medium md:base-regular mt-1">To use AniGame enter your account details</p>
+        <p className="text-light-3 small-medium md:base-regular mt-1">
+          To use AniGame enter your account details
+        </p>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 w-full mt-2 ">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-2 w-full mt-2 "
+        >
           <FormField
             control={form.control}
             name="name"
@@ -132,7 +149,10 @@ function SignupForm() {
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
             Already have an account?
-            <Link to="/sign-in" className="text-primary-500 text-small-semibold ml-1">
+            <Link
+              to="/sign-in"
+              className="text-primary-500 text-small-semibold ml-1"
+            >
               Log in
             </Link>
           </p>
