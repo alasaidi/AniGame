@@ -28,7 +28,7 @@ function Topbar() {
             to={`/profile/${user.id}`}
             className="flex-center gap-3
           ">
-            <img src={user.imageUrl || "/assets/images/profile.png"} alt="profile" className="h-3 w-8 rounded-full" />
+            <img src={user.imageUrl || "/assets/images/profile.png"} alt="profile" className="h-8 w-8 rounded-full" />
           </Link>
         </div>
       </div>
