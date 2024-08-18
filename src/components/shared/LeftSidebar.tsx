@@ -49,7 +49,7 @@ function LeftSidebar() {
               >
                 <NavLink
                   to={link.route}
-                  className="flex gap-4 items-center p-4"
+                  className="flex gap-1 items-center p-2"
                 >
                   <img
                     src={link.imgURL}
@@ -61,14 +61,14 @@ function LeftSidebar() {
               </li>
             );
           })}
-        </ul>{" "}
+        </ul>
       </div>
       <Button
         variant="ghost"
-        className="shad-button-ghost flex justify-start"
+        className="shad-button_ghost  "
         onClick={() => signOut()}
       >
-        <img src="/assets/icons/logout.svg" alt="logout" />{" "}
+        <img src="/assets/icons/logout.svg" alt="logout" />
         <p className="small-medium lg:base-medium">Logout</p>
       </Button>
     </nav>
