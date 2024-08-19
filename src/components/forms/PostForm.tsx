@@ -1,37 +1,65 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import FileUploader from "../shared/FileUploader";
+import { PostValidation } from "@/lib/validation";
+import { Models } from "appwrite";
+import { useUserContext } from "@/context/AuthContext";
+import { useToast } from "../ui/use-toast";
+import { useCreatePost } from "@/lib/react-query/queriesAndMutation";
 
-const formSchema = z.object({
-  caption: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
+type PostFormProps = {
+  post?: Models.Document;
+};
 
-export default function PostForm() {
+export default function PostForm({ post }: PostFormProps) {
+  const { toast } = useToast();
+  const { user } = useUserContext();
+  const navigate = useNavigate();
+  const { muatetAsync: createPost, isPendig: isLoadingCreate } =
+    useCreatePost();
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof PostValidation>>({
+    resolver: zodResolver(PostValidation),
     defaultValues: {
-      caption: "",
+      caption: post ? post?.caption : "",
+      file: [],
+      location: post ? post?.location : "",
+      tags: post ? post.tags.join(",") : "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+  const onSubmit = async (values: z.infer<typeof PostValidation>) => {
+    const newPost = await createPost({
+      ...values,
+      userId: user.id,
+    });
+    if (!newPost) {
+      toast({ title: "please try again" });
+    }
+
+    navigate("/");
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-9 w-full max-w-5xl">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-9 w-full max-w-5xl"
+      >
         <FormField
           control={form.control}
           name="caption"
@@ -39,7 +67,10 @@ export default function PostForm() {
             <FormItem>
               <FormLabel className="shad-form_label">Caption</FormLabel>
               <FormControl>
-                <Textarea className="shad-textarea custom-scrollbar" {...field} />
+                <Textarea
+                  className="shad-textarea custom-scrollbar"
+                  {...field}
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -52,7 +83,10 @@ export default function PostForm() {
             <FormItem>
               <FormLabel className="shad-form_label">Add Photos</FormLabel>
               <FormControl>
-                <FileUploader />
+                <FileUploader
+                  fieldChange={field.onChange}
+                  mediaUrl={post?.imageUrl}
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -76,9 +110,15 @@ export default function PostForm() {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Tags (separated by comma ",")</FormLabel>
+              <FormLabel className="shad-form_label">
+                Add Tags (separated by comma ",")
+              </FormLabel>
               <FormControl>
-                <Input className="shad-input" {...field} placeholder="Anime, Games, Otaku" />
+                <Input
+                  className="shad-input"
+                  placeholder="Anime, Games, Otaku"
+                  {...field}
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -88,7 +128,10 @@ export default function PostForm() {
           <Button type="button" className="shad-button_dark_4">
             Cancel
           </Button>
-          <Button type="submit" className="shad-button_primary whitespace-nowrap">
+          <Button
+            type="submit"
+            className="shad-button_primary whitespace-nowrap"
+          >
             Submit
           </Button>
         </div>

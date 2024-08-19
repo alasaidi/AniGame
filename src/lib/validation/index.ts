@@ -19,3 +19,10 @@ export const SignInValidation = z.object({
     message: "Too short at Least 8 Character.",
   }),
 });
+
+export const PostValidation = z.object({
+  caption: z.string().min(2).max(2200),
+  file: z.custom<File[]>(),
+  tags: z.string(),
+  location: z.string().min(2).max(100),
+});
