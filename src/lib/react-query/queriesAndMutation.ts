@@ -4,9 +4,10 @@ import {
   useQueryClient,
   useInfiniteQuery,
 } from "@tanstack/react-query";
-
-import { INewUser } from "@/types";
+import { INewPost } from "@/types";
+import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 import createUserAccount, {
+  createPost,
   signInAccount,
   signOutAccount,
 } from "../appwrite/api";
@@ -27,5 +28,17 @@ export const useSignInAccount = () => {
 export const useSignOutAccount = () => {
   return useMutation({
     mutationFn: signOutAccount,
+  });
+};
+
+export const useCreatePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: INewPost) => createPost(post),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+      });
+    },
   });
 };
