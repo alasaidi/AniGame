@@ -3,7 +3,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import FileUploader from "../shared/FileUploader";
@@ -21,7 +28,8 @@ export default function PostForm({ post }: PostFormProps) {
   const { toast } = useToast();
   const { user } = useUserContext();
   const navigate = useNavigate();
-  const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost();
+  const { mutateAsync: createPost, isPending: isLoadingCreate } =
+    useCreatePost();
   // 1. Define your form.
   const form = useForm<z.infer<typeof PostValidation>>({
     resolver: zodResolver(PostValidation),
@@ -48,7 +56,10 @@ export default function PostForm({ post }: PostFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-9 w-full max-w-5xl">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-9 w-full max-w-5xl"
+      >
         <FormField
           control={form.control}
           name="caption"
@@ -56,7 +67,10 @@ export default function PostForm({ post }: PostFormProps) {
             <FormItem>
               <FormLabel className="shad-form_label">Caption</FormLabel>
               <FormControl>
-                <Textarea className="shad-textarea custom-scrollbar" {...field} />
+                <Textarea
+                  className="shad-textarea custom-scrollbar"
+                  {...field}
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -69,7 +83,10 @@ export default function PostForm({ post }: PostFormProps) {
             <FormItem>
               <FormLabel className="shad-form_label">Add Photos</FormLabel>
               <FormControl>
-                <FileUploader fieldChange={field.onChange} mediaUrl={post?.imageUrl} />
+                <FileUploader
+                  fieldChange={field.onChange}
+                  mediaUrl={post?.imageUrl}
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -93,9 +110,15 @@ export default function PostForm({ post }: PostFormProps) {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Tags (separated by comma ",")</FormLabel>
+              <FormLabel className="shad-form_label">
+                Add Tags (separated by comma ",")
+              </FormLabel>
               <FormControl>
-                <Input className="shad-input" placeholder="Anime, Games, Otaku" {...field} />
+                <Input
+                  className="shad-input"
+                  placeholder="Anime, Games, Otaku"
+                  {...field}
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -105,7 +128,10 @@ export default function PostForm({ post }: PostFormProps) {
           <Button type="button" className="shad-button_dark_4">
             Cancel
           </Button>
-          <Button type="submit" className="shad-button_primary whitespace-nowrap">
+          <Button
+            type="submit"
+            className="shad-button_primary whitespace-nowrap"
+          >
             Submit
           </Button>
         </div>
