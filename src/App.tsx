@@ -2,18 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import SignInForm from "./_auth/forms/SigninForm";
 import SignupForm from "./_auth/forms/SignupForm";
 import "./global.css";
-import {
-  AllUsers,
-  CreatePost,
-  EditPost,
-  Explore,
-  Home,
-  LikedPosts,
-  PostDetails,
-  Profile,
-  Saved,
-  UpdateProfile,
-} from "./_root/pages";
+import { AllUsers, CreatePost, EditPost, Explore, Home, LikedPosts, PostDetails, Profile, Saved, UpdateProfile } from "./_root/pages";
 import AuthLaout from "./_auth/AuthLaout";
 import RootLayout from "./_root/RootLayout";
 import { Toaster } from "@/components/ui/toaster";
@@ -35,7 +24,7 @@ export const App = () => {
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/update-post/:id" element={<EditPost />} />
-          <Route path="/post/:id" element={<PostDetails />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/liked-post/:id" element={<LikedPosts />} />
 
