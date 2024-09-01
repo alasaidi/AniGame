@@ -116,9 +116,15 @@ export default function PostForm({ post, action }: PostFormProps) {
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Location</FormLabel>
+              <FormLabel className="shad-form_label">
+                Add if you're an Otaku, Gamer, or both.
+              </FormLabel>
               <FormControl>
-                <Input className="shad-input" {...field} />
+                <Input
+                  className="shad-input"
+                  {...field}
+                  placeholder="Gamer, Otaku"
+                />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
