@@ -21,12 +21,7 @@ function LeftSidebar() {
     <nav className="leftsidebar">
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex gap-3 items-center">
-          <img
-            src="/assets/images/logo.png"
-            alt="Logo"
-            width={70}
-            height={70}
-          />
+          <img src="/assets/images/logo.png" alt="Logo" width={70} height={70} />
         </Link>
         <Link to={`/profile/${user.id}`} className="flex gap-3 items-center">
           <img
@@ -43,14 +38,8 @@ function LeftSidebar() {
           {sidebarLinks.map((link: INavLink) => {
             const isActive = pathname === link.route;
             return (
-              <li
-                key={link.label}
-                className={`leftsidebar-link group ${isActive && "bg-primary-500"}`}
-              >
-                <NavLink
-                  to={link.route}
-                  className="flex gap-1 items-center p-2"
-                >
+              <li key={link.label} className={`leftsidebar-link group ${isActive && "bg-primary-500"}`}>
+                <NavLink to={link.route} className="flex gap-1 items-center p-2">
                   <img
                     src={link.imgURL}
                     alt={link.label}
@@ -63,11 +52,7 @@ function LeftSidebar() {
           })}
         </ul>
       </div>
-      <Button
-        variant="ghost"
-        className="shad-button_ghost  "
-        onClick={() => signOut()}
-      >
+      <Button variant="ghost" className="shad-button_ghost  " onClick={() => signOut()}>
         <img src="/assets/icons/logout.svg" alt="logout" />
         <p className="small-medium lg:base-medium">Logout</p>
       </Button>
