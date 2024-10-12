@@ -1,7 +1,7 @@
 import React from "react";
 
-function UpdatProfile() {
+function UpdateProfile() {
   return <div>UpdatProfile</div>;
 }
 
-export default UpdatProfile;
+export default UpdateProfile;
