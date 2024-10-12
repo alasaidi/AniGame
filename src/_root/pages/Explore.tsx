@@ -4,9 +4,11 @@ import GridPostList from "@/components/shared/GridPostList";
 import { useGetPosts, useSearchPosts } from "@/lib/react-query/queriesAndMutation";
 import useDebounce from "@/hooks/useDebounce";
 import Loader from "@/components/shared/Loader";
+import { Models } from "appwrite";
+
 import { useInView } from "react-intersection-observer";
 function Explore() {
-  const { ref, inView, entry } = useInView({
+  const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
   });
@@ -16,8 +18,10 @@ function Explore() {
   const { data: searchedPosts, isFetching: isSearchFetching } = useSearchPosts(debouncedValue);
 
   useEffect(() => {
-    if (inView && !searchValue) fetchNextPage();
-  }, [inView, searchValue]);
+    if (inView && !searchValue) {
+      fetchNextPage();
+    }
+  }, [inView, searchValue, fetchNextPage]);
 
   if (!posts) {
     return (
@@ -27,7 +31,7 @@ function Explore() {
     );
   }
   const shouldShowSearchResults = searchValue !== "";
-  const shouldShowPosts = !shouldShowSearchResults && posts.pages.every((item) => item.documents.length === 0);
+  const shouldShowPosts = !shouldShowSearchResults && posts.pages.every((item) => item?.documents.length === 0);
 
   return (
     <div className="explore-container">
@@ -53,11 +57,14 @@ function Explore() {
       </div>
       <div className="flex flex-wrap gap-9 w-full max-w-5xl">
         {shouldShowSearchResults ? (
-          <SearchResults isSearchFetching={isSearchFetching} searchedPosts={searchedPosts} />
+          <SearchResults isSearchFetching={isSearchFetching} searchedPosts={searchedPosts?.documents ?? []} />
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10text-center w-full">End of posts</p>
         ) : (
-          posts.pages.map((item, index) => <GridPostList key={`page-${index}`} posts={item.documents} />)
+          posts.pages.map(
+            (item, index) =>
+              item?.documents && <GridPostList key={`page-${index}`} posts={item.documents as Models.Document[]} />
+          )
         )}
       </div>
       {hasNextPage && !searchValue && (

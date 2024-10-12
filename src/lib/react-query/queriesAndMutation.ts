@@ -15,7 +15,6 @@ import createUserAccount, {
   deletePost,
   getInfinitePosts,
   searchPosts,
-  getSavedPost,
 } from "../appwrite/api";
 
 export const useCreateUserAccount = () => {
@@ -51,6 +50,9 @@ export const useGetRecentPosts = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
     queryFn: getRecentPosts,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    staleTime: 0,
   });
 };
 
@@ -154,10 +156,11 @@ export const useGetPosts = () => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
     queryFn: getInfinitePosts,
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (lastPage && lastPage?.documents.length === 0) return null;
       const lastId = lastPage?.documents[lastPage?.documents.length - 1].$id;
-      return lastId;
+      return lastId ? parseInt(lastId) : undefined;
     },
   });
 };
