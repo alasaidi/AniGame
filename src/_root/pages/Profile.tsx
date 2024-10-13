@@ -1,36 +1,55 @@
-import { useUserContext } from "@/context/AuthContext";
-// import { useEffect, useState } from "react";
-// import SearchResults from "@/components/shared/SearchResults";
+import { useEffect, useState } from "react";
 import GridPostList from "@/components/shared/GridPostList";
-import { useGetPosts } from "@/lib/react-query/queriesAndMutation";
-// import useDebounce from "@/hooks/useDebounce";
+import { useGetPosts, useGetCurrentUser } from "@/lib/react-query/queriesAndMutation";
 import { Models } from "appwrite";
-
 import Loader from "@/components/shared/Loader";
+
 function Profile() {
-  const { user } = useUserContext();
+  const { data: currentUser, isLoading, error } = useGetCurrentUser();
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [showAllPosts, setShowAllPosts] = useState(true);
   const { data: posts } = useGetPosts();
-  if (!posts) {
+
+  useEffect(() => {
+    if (currentUser && currentUser.liked) {
+      const postsWithCreator = currentUser.liked.map((likedPost) => ({
+        ...likedPost.post,
+        creator: {
+          name: currentUser.name,
+          username: currentUser.username,
+          imageUrl: currentUser.imageUrl,
+        },
+      }));
+      setLikedPosts(postsWithCreator);
+    }
+  }, [currentUser]);
+  if (isLoading) {
     return (
       <div className="flex-center w-full h-full">
         <Loader />
       </div>
     );
   }
-  console.log(posts);
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  if (!currentUser) {
+    return <div>No user data available</div>;
+  }
+  console.log(currentUser);
   return (
     <div className="profile-container">
       <div className="profile-inner_container">
         <div className="flex xl:flex-row flex-col max-xl:items-center flex-1 gap-7">
           {" "}
           <img
-            src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
+            src={currentUser.imageUrl || "/assets/icons/profile-placeholder.svg"}
             alt="profile"
             className="h-14 w-14 rounded-full"
           />
           <div className="flex flex-col">
-            <p className="body-bold">{user.name}</p>
-            <p className="small-regular text-light-3">@{user.username}</p>
+            <p className="body-bold">{currentUser.name}</p>
+            <p className="small-regular text-light-3">@{currentUser.username}</p>
           </div>
           <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
             <p>posts</p>
@@ -46,24 +65,34 @@ function Profile() {
         </div>
       </div>
 
-      <div className="flex justify-between gap-4">
-        <div className="flex justify-center gap-4">
-          <div className="flex max-w-5xl w-ful bg-dark-3">
-            <img src="/assets/icons/posts.svg" alt="add" width={20} height={20} />
-            <h2 className="flex whitespace-nowrap small-medium">Posts</h2>
-          </div>
-        </div>
-        <div className="flex justify-center gap-4">
-          <div className="flex max-w-5xl w-ful bg-dark-3">
-            <img src="/assets/icons/like.svg" alt="add" width={20} height={20} />
-            <h2 className="flex whitespace-nowrap small-medium">Liked Post</h2>
-          </div>
-        </div>
+      <div className="flex justify-start gap-0">
+        <button
+          className={`profile-tab  ${showAllPosts ? "bg-dark-3" : "bg-dark-4"}`}
+          onClick={() => setShowAllPosts(true)}>
+          <img src="/assets/icons/posts.svg" alt="posts" width={20} height={20} />
+          <span className="whitespace-nowrap small-medium">Posts</span>
+        </button>
+        <button
+          className={`profile-tab  ${!showAllPosts ? "bg-dark-3" : "bg-dark-4"}`}
+          onClick={() => setShowAllPosts(false)}>
+          <img src="/assets/icons/like.svg" alt="liked posts" width={20} height={20} />
+          <span className="whitespace-nowrap small-medium">Liked Posts</span>
+        </button>
       </div>
 
       <div className="flex flex-wrap gap-9 w-full max-w-5xl">
-        {posts.pages.map(
-          (item, index) => item?.documents && <GridPostList key={index} posts={item.documents as Models.Document[]} />
+        {showAllPosts ? (
+          posts?.pages ? (
+            posts.pages.map((page, index) =>
+              page?.documents ? <GridPostList key={index} posts={page.documents as Models.Document[]} /> : null
+            )
+          ) : (
+            <p>No posts found.</p>
+          )
+        ) : likedPosts.length > 0 ? (
+          <GridPostList posts={likedPosts} showStats={false} />
+        ) : (
+          <p>No liked posts found.</p>
         )}
       </div>
     </div>
