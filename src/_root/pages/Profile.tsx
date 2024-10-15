@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import GridPostList from "@/components/shared/GridPostList";
 import { useGetPosts, useGetCurrentUser } from "@/lib/react-query/queriesAndMutation";
 import { Models } from "appwrite";
@@ -36,7 +37,7 @@ function Profile() {
   if (!currentUser) {
     return <div>No user data available</div>;
   }
-  console.log(currentUser);
+
   return (
     <div className="profile-container">
       <div className="profile-inner_container">
@@ -58,10 +59,12 @@ function Profile() {
           </div>
         </div>
         <div className="flex justify-center gap-4">
-          <div className="h-8 bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg">
-            <img src="/assets/icons/edit.svg" alt="add" width={20} height={20} />
-            <h2 className="flex whitespace-nowrap small-medium">Edit profile</h2>
-          </div>
+          <Link to={`/update-profile/${currentUser.$id}`}>
+            <button className="h-8 bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg">
+              <img src="/assets/icons/edit.svg" alt="edit" width={20} height={20} />
+              <h2 className="flex whitespace-nowrap small-medium">Edit profile</h2>
+            </button>
+          </Link>
         </div>
       </div>
 
