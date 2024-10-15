@@ -10,6 +10,9 @@ export type IUpdateUser = {
   bio: string;
   imageId: string;
   imageUrl: URL | string;
+  username: string;
+  email: string;
+  password: string;
   file: File[];
 };
 
